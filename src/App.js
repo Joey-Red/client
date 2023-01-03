@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./index.css";
+import MobileNav from "./Components/MobileNav";
+import MobilePost from "./Components/MobilePost";
+import MobileFooter from "./Components/MobileFooter";
+import PostButton from "./Components/PostButton";
+import MobileCreatePost from "./Components/MobileCreatePost";
+import MobileViewPost from "./Components/MobileViewPost";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // flex flex-col sm:flex-row
+    <div className="w-full">
+      {/* <MobileNav /> */}
+      {/* This mb div goes on when mobile nav is on */}
+      {/* <div className="mb-[53px]"></div> */}
+      {/* <MobilePost /> */}
+      <MobileCreatePost />
+      {/* <MobileViewPost /> */}
+      {/* <MobileFooter /> */}
     </div>
   );
 }
