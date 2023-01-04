@@ -1,16 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faImage } from "@fortawesome/free-solid-svg-icons";
 import img from "../pic.png";
-function MobileCreatePost() {
+import axios from "axios";
+
+function MobileCreatePost(props) {
+  let {
+    setNavState,
+    setFooterState,
+    setCreatePostState,
+    setPostContainerState,
+    userToken,
+    username,
+    userId,
+    setSuccessNotif,
+  } = props;
+  let [currPost, setCurrPost] = useState("");
+  let config = {
+    // method: "post",
+    // url: "http://localhost:8080/create-post",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  let createPost = () => {
+    console.log("ran");
+    console.log(currPost, username, userId, userToken);
+    axios
+      .post(
+        "http://localhost:8080/create-post",
+        {
+          postBody: currPost,
+          username: username,
+          postUserId: userId,
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setCreatePostState(false);
+          setNavState(true);
+          setFooterState(true);
+          setPostContainerState(true);
+          setCreatePostState(false);
+          setSuccessNotif(true);
+        }
+      })
+      .catch();
+  };
+
+  let handleClick = () => {
+    setNavState(true);
+    setFooterState(true);
+    setPostContainerState(true);
+    setCreatePostState(false);
+  };
   return (
     <div className="w-full px-4">
       <div className="flex w-full justify-between h-[53px] items-center">
         {/* top bar */}
-        <button>
+        <button onClick={handleClick}>
           <FontAwesomeIcon icon={faArrowLeft} className="flex" />
         </button>
-        <button className="bg-red-500 rounded-2xl text-white min-w-14 min-h-8 px-4">
+        <button
+          onClick={() => createPost()}
+          className="bg-red-500 rounded-2xl text-white min-w-14 min-h-8 px-4"
+        >
           Post!
         </button>
       </div>
@@ -31,6 +87,7 @@ function MobileCreatePost() {
               type="text"
               className="text-lg font-medium"
               placeholder="What's happening?"
+              onChange={(e) => setCurrPost(e.target.value)}
             />
           </div>
           <button
