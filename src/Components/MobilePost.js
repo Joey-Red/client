@@ -11,8 +11,9 @@ import {
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
 function MobilePost() {
+  // When you click on a post
   return (
-    <div className="flex w-full border-light-gray border-b">
+    <div className="flex w-full border-light-gray border-b last-of-type:mb-[51px]">
       <article className="px-4 flex w-full">
         <div className="w-full flex flex-col">
           <div className="pt-3"></div>
@@ -21,7 +22,7 @@ function MobilePost() {
               <img
                 src={img}
                 alt=""
-                className="max-h-12 min-h-12 min-w-12 max-w-12 rounded-full mr-3"
+                className="max-h-[48px] min-h-[48px] min-w-[48px] max-w-[48px] rounded-full mr-3"
               />
             </div>
             <div className="flex flex-col">
