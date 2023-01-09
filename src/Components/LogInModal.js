@@ -10,6 +10,7 @@ function LogInModal(props) {
     setUserToken,
     setUserId,
     setUsername,
+    setUserPic,
   } = props;
   let [usernameField, setUsernameField] = useState("");
   let [passwordField, setPasswordField] = useState("");
@@ -27,6 +28,7 @@ function LogInModal(props) {
           setLogInModalState(false);
           setUserId(res.data.user._id);
           setUsername(res.data.user.username);
+          setUserPic(res.data.user.picNum);
         }
       })
       .catch();
