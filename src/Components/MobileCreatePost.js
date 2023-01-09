@@ -3,7 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faImage } from "@fortawesome/free-solid-svg-icons";
 import img from "../pic.png";
 import axios from "axios";
-
+import imgOne from "../resources/BearDALLE.png";
+import imgTwo from "../resources/ElephantDALLE.png";
+import imgThree from "../resources/GreyAnimalDALLE.png";
+import imgFour from "../resources/Monkey2DALLE.png";
+import imgFive from "../resources/MonkeyDALLE.png";
+import imgSix from "../resources/PandaDALLE.png";
+import imgSeven from "../resources/RaccoonDALLE.png";
+import imgEight from "../resources/RobotDALLE.png";
+import imgNine from "../resources/SkunkDALLE.png";
 function MobileCreatePost(props) {
   let {
     setNavState,
@@ -14,18 +22,17 @@ function MobileCreatePost(props) {
     username,
     userId,
     setSuccessNotif,
+    userPic,
   } = props;
   let [currPost, setCurrPost] = useState("");
   let config = {
-    // method: "post",
-    // url: "http://localhost:8080/create-post",
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
   };
   let createPost = () => {
-    console.log("ran");
-    console.log(currPost, username, userId, userToken);
+    // console.log("ran");
+    // console.log(currPost, username, userId, userToken);
     axios
       .post(
         "http://localhost:8080/create-post",
@@ -33,6 +40,9 @@ function MobileCreatePost(props) {
           postBody: currPost,
           username: username,
           postUserId: userId,
+          userPic: userPic,
+          sharedPostId: "123",
+          picNum: userPic,
         },
         config
       )
@@ -49,6 +59,33 @@ function MobileCreatePost(props) {
       })
       .catch();
   };
+  // TESTING
+  let createPosts = () => {
+    // console.log("ran");
+    // console.log(currPost, username, userId, userToken);
+    for (let i = 0; i < 6; i++) {
+      axios
+        .post(
+          "http://localhost:8080/create-post",
+          {
+            postBody: i,
+            username: username,
+            postUserId: userId,
+            userPic: userPic,
+            sharedPostId: "123",
+          },
+          config
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            console.log("posted");
+          }
+        })
+        .catch();
+    }
+  };
+  // TESTING
 
   let handleClick = () => {
     setNavState(true);
@@ -56,6 +93,33 @@ function MobileCreatePost(props) {
     setPostContainerState(true);
     setCreatePostState(false);
   };
+  if (userPic === "imgOne") {
+    img = imgOne;
+  }
+  if (userPic === "imgTwo") {
+    img = imgTwo;
+  }
+  if (userPic === "imgThree") {
+    img = imgThree;
+  }
+  if (userPic === "imgFour") {
+    img = imgFour;
+  }
+  if (userPic === "imgFive") {
+    img = imgFive;
+  }
+  if (userPic === "imgSix") {
+    img = imgSix;
+  }
+  if (userPic === "imgSeven") {
+    img = imgSeven;
+  }
+  if (userPic === "imgEight") {
+    img = imgEight;
+  }
+  if (userPic === "imgNine") {
+    img = imgNine;
+  }
   return (
     <div className="w-full px-4">
       <div className="flex w-full justify-between h-[53px] items-center">
@@ -63,6 +127,12 @@ function MobileCreatePost(props) {
         <button onClick={handleClick}>
           <FontAwesomeIcon icon={faArrowLeft} className="flex" />
         </button>
+        {/* <button
+          onClick={() => createPosts()}
+          className="bg-red-500 rounded-2xl text-white min-w-14 min-h-8 px-4"
+        >
+          Postsss
+        </button> */}
         <button
           onClick={() => createPost()}
           className="bg-red-500 rounded-2xl text-white min-w-14 min-h-8 px-4"
