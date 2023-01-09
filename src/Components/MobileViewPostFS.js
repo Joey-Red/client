@@ -84,6 +84,7 @@ function MobileViewPostFS(props) {
       }
     }
   }, [postLoaded]);
+
   let sharePost = (e) => {
     // 1st Get post ID
     // Pop up modal with textbox
@@ -92,6 +93,7 @@ function MobileViewPostFS(props) {
     // Saves shared post ID to post SCHEMA
     // Mobile post & MobileViewPostFS will need to check for sharedPostID's
   };
+
   let likePost = (e) => {
     if (!loggedIn) {
       // You must log in to like a post
